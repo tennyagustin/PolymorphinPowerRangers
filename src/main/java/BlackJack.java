@@ -2,7 +2,7 @@
  * Created by rogi on 1/29/16.
  */
 public class BlackJack {
-
+String simon = "Simon Hamermesh";
 
 
  int drawCard(){
