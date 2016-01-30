@@ -6,6 +6,7 @@ public class Casino {
     public static void main(String[] args){
         User me = new User();
         String name = me.name; //this 'me.name' comes from player class
+        BlackJack bj = new BlackJack("blackjack", me);
     }
 
     public static void offerGame(){

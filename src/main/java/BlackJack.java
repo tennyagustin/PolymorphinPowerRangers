@@ -1,8 +1,8 @@
 /**
  * Created by rogi on 1/29/16.
  */
-public class BlackJack {
-String simon = "Simon Hamermesh";
+public class BlackJack extends Game implements CardGame {
+
 
 
  int drawCard(){
@@ -14,7 +14,8 @@ String simon = "Simon Hamermesh";
  };
 
  String cardTransposer(int[] playersHand){
-  return null;
+
+     return null;
  };
 
  private void hitOrStay(){
@@ -46,6 +47,29 @@ String simon = "Simon Hamermesh";
 
     BlackJack(String gameName, Player player){
 
+        gameType = gameName;
+        System.out.println("Welcome to BlackJack. We are looking forward to taking your money " +
+                "and pretending to be your friend"+ "\n" + "\n"+ "How many players at your table?");
+
+
+
+
+        this.setupGame(gameName,player);
+
+
+
+
+    }
+
+
+    private void setupGame(String gameName, Player player){
+
+        gameType = gameName;
+
+        System.out.println("Welcome to BlackJack. We are looking forward to taking your money and pretending to be your friend");
+
+        gamePlayers[0] = player;
+        gamePlayers[1] = new Player();
     }
 
     //BlackJack(String Player){
