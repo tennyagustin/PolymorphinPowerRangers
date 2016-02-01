@@ -30,35 +30,37 @@ public class Game {
 
     protected boolean promptGameChange(){
 
-        System.out.println("Would you like to play another game? Enter yes, no or maybe to check" +
+        System.out.println("Would you like to play different game? Enter yes, no or maybe to check" +
                 " your wallet balance.");
 
         String userChoice = scanner.nextLine();
 
-        if(userChoice == "yes"){
+        if(userChoice.equals("yes")){
             Casino.offerGame(gamePlayers.get(0));
-            return true;
         }
-        else if(userChoice == "no"){
+        else if(userChoice.equals("no")){
             System.out.println("OK, thanks for the money, chump!");
             return false;
         }
-        else if(userChoice == "maybe"){
+        else if(userChoice.equals("maybe")){
             checkWallet();
             System.out.println("Hit any key to return: ");
             String cheatingIsGood = scanner.nextLine();
-            if(cheatingIsGood != "polymorphinpowerup"){
+            if(!(cheatingIsGood.equals("polymorphinpowerup"))){
                promptGameChange();
-            } else if(cheatingIsGood == "polymorphinpowerup"){
+            } else if(cheatingIsGood.equals("polymorphinpowerup")){
                 System.out.println("Secret TapMAC Accessed. Enter an amount: ");
-                String slushFunds = scanner.nextLine();
-                int illicitFunds = Integer.parseInt(slushFunds);
+                int illicitFunds  = scanner.nextInt();
                 ((User)gamePlayers.get(0)).tapMAC(illicitFunds);
                 checkWallet();
                promptGameChange();
 
             }
 
+        }
+        else{
+            System.out.println("Sorry, that's not an option!");
+            promptGameChange();
         }
     return false;
     }
