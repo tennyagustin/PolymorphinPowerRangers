@@ -1,198 +1,189 @@
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
  * Created by Tenny on 1/30/16.
  */
 
-enum spellTypes{
-    FIRE, WATER, DEFEND, ELECTRIC
+
+
+enum Spell {
+
+    DEFEND(0, 100), WATER(5, 100), FIRE(10, 50), ELECTRIC(15, 25);
+
+    int damageOutput;
+    int accuracy;
+
+    Spell(int damageOutput, int accuracy) {
+        this.damageOutput = damageOutput;
+        this.accuracy = accuracy;
+
+    }
+
 }
 
+//START OF RPG
 public class RPG extends Game {
 
+    Spell yourSpell;
+    Spell opponentSpell;
+    ArrayList<Integer> Spells = new ArrayList<Integer>();
+
     private static int[] healthPointArray = new int[2];
+    private Player hero;
+    private Player enemy;
     private int currentSpell;
 
-    boolean gameOver = false;
-    boolean defending = false;
+    private boolean defending;
+    //private boolean gameOver;
 
-    ArrayList<Object> yourSpellbook;
-    ArrayList<Object> opponentSpellbook;
-
-    int yourHealthPoints = healthPointArray[0];
-    int opponentHealthPoints = healthPointArray[1];
-
-    spellTypes[] allSpells = {spellTypes.FIRE, spellTypes.WATER, spellTypes.DEFEND, spellTypes.ELECTRIC};
-    int[] spellAccuracy = {50, 100, 100, 25};
-    int[] spellDamage = {10, 5, 0, 15};
+    int playerStartHealth = healthPointArray[0];
+    int opponentStartHealth = healthPointArray[1];
 
     RPG(String name, Player player) {
 
-        gameType = name;
-
-        gamePlayers[0] = player;
-        gamePlayers[1] = new Player();
+        setupGame(name, player);
 
     }
 
-    protected void setupGame() {
+    protected void setupGame(String name, Player hero) {
 
-        int yourHealthPoints = 30;
-        int opponentHealthPoints = 30;
+        this.gameType = name;
 
-        Random rand = new Random();
+        this.gamePlayers = new ArrayList<Player>(2);
 
+        this.gamePlayers.add(0, hero);
+        hero = gamePlayers.get(0);
 
-    public static void main(String[] args) {
-        RPG myRPG = new RPG();
-        myRPG.mainMenu();
+        hero.cards.set(0, Spell.DEFEND.ordinal());
+        hero.cards.set(1, Spell.WATER.ordinal());
+        hero.cards.set(2, Spell.FIRE.ordinal());
+        hero.cards.set(3, Spell.ELECTRIC.ordinal());
 
-    }
+        this.gamePlayers.add(1, enemy);
 
-    public RPG() {
+        enemy = gamePlayers.get(1);
 
-        yourSpellbook = new ArrayList<Object>();
-        opponentSpellbook = new ArrayList<Object>();
+        enemy.cards.set(0, Spell.DEFEND.ordinal());
+        enemy.cards.set(1, Spell.WATER.ordinal());
+        enemy.cards.set(2, Spell.FIRE.ordinal());
+        enemy.cards.set(3, Spell.ELECTRIC.ordinal());
 
-        yourSpellbook.add(spellTypes.DEFEND);
-        yourSpellbook.add(spellTypes.WATER);
-        yourSpellbook.add(spellTypes.FIRE);
-        yourSpellbook.add(spellTypes.ELECTRIC);
+        System.out.println("Welcome to RPG");
+        healthPointArray[0] = 30;
+        healthPointArray[1] = 30;
 
-        opponentSpellbook.add(spellTypes.DEFEND);
-        opponentSpellbook.add(spellTypes.WATER);
-        opponentSpellbook.add(spellTypes.FIRE);
-        opponentSpellbook.add(spellTypes.ELECTRIC);
+    mainMenu();
 
-    }
-
+}
     private void mainMenu() {
-
-        //while (!gameOver) {
 
         System.out.println("Choose an action: ATTACK, STATUS, SHOP, RUN?");
         Scanner scan = new Scanner(System.in);
         String input = scan.nextLine().toUpperCase();
 
         if (input.equals("ATTACK")) {
-            attack();
+            fight();
         } else if (input.equals("STATUS")) {
             display();
         } else if (input.equals("SHOP")) {
             getSpell();
         } else if (input.equals("RUN")) {
-            System.out.println("Start prompt method.");
+            promptGameChange();
         }
+    }
+
+    private void fight() {
+//pick a spell first; have logic to see if it's a valid spell
+//maybe use display to display current spells
+        //indexOf and find first instance of something to check for available spell
+        //replace
+        //.get to get the spell in whatever index position
+
+        int opponentAttackSelection = enemy.cards.get(rand.nextInt(enemy.cards.size()));
+        if (rand.nextInt(100) < opponentSpell.accuracy) {
+            playerStartHealth -= opponentSpell.damageOutput;
+
+            enemy.cards.remove(opponentAttackSelection);
+
+
+        }
+
+        chooseSpell();
+        compareSpell();
+        display();
 
 
     }
 
-    private void attack() {
+    private int chooseSpell() {
 
-        System.out.println("Choose your attack.");
-        Scanner scan = new Scanner(System.in);
-        String currentSpell = scan.nextLine().toUpperCase();
+        String heroChoice = scanner.nextLine();
+        int currentSpell;
 
-        int damage = 0;
-        int accuracy = 0;
 
-        String successMessage = "";
-        String failMessage = "";
+        //iterate through every item of hero's spells
+        for (currentSpell = 0; currentSpell < hero.cards.size() - 1; currentSpell++) {
+            return currentSpell;
+        }
 
-        /*spellTypes spell = null;
-
-        if (currentSpell.equals("WATER")) {
-            spell = spellTypes.WATER;
-        } else if (currentSpell.equals("FIRE")) {
-            spell = spellTypes.FIRE;
-        } else if (currentSpell.equals("ELECTRIC")) {
-            spell = spellTypes.ELECTRIC;
-        } else if (currentSpell.equals("DEFEND")) {
-            spell = spellTypes.DEFEND;
+        //changes input to ordinal number of array
+        if (heroChoice.equals(Spell.DEFEND.toString())) {
+            currentSpell = Spell.DEFEND.ordinal();
+        } else if (heroChoice.equals(Spell.WATER.toString())) {
+            currentSpell = Spell.WATER.ordinal();
+        } else if (heroChoice.equals(Spell.FIRE.toString())) {
+            currentSpell = Spell.FIRE.ordinal();
+        } else if (heroChoice.equals(Spell.ELECTRIC.toString())) {
+            currentSpell = Spell.ELECTRIC.ordinal();
         } else {
-            // invalid input
-            System.out.println("You can't do that shit.");
-            //TODO: break
-        }*/
+            mainMenu();
+        }
 
-        // user attack
-            if (currentSpell.equals("WATER") && yourSpellbook.contains(spellTypes.WATER)) {
-                yourSpellbook.remove(spellTypes.WATER);
-                System.out.println("You cast a water spell.");
-                damage = spellDamage[spellTypes.WATER.ordinal()];
-                accuracy = spellAccuracy[spellTypes.WATER.ordinal()];
-                successMessage = "You spell soaks your opponent's socks. Argh! Everyone hates wet socks!";
-                failMessage = "How did you fail?";
-
-            } else if (currentSpell.equals("FIRE") && yourSpellbook.contains(spellTypes.FIRE)) {
-                yourSpellbook.remove(spellTypes.FIRE);
-                System.out.println("You cast a fire spell.");
-                damage = 10;
-                accuracy = 50;
-                successMessage = "You say, 'I've seen better spells at a dyslexic spelling bee!' Oooh, burn!";
-                failMessage = "Your opponent puts up a bread shield. Yum! Toast!";
-
-            } else if (currentSpell.equals("ELECTRIC") && yourSpellbook.contains(spellTypes.ELECTRIC)) {
-                yourSpellbook.remove(spellTypes.ELECTRIC);
-                System.out.println("You cast an electric spell.");
-                damage = 15;
-                accuracy = 25;
-                successMessage = "You elec-trick your opponent into line dancing. When striking a disco pose, they're struck by lightning!";
-                failMessage = "Your opponent electric slides out of the way!";
-
-            } else if (currentSpell.equals("DEFEND") && yourSpellbook.contains(spellTypes.DEFEND)) {
-                System.out.println("You defend.");
-                defending = true;
-                System.out.println("Why do we have to fight? You peacefully protest.");
+        //player choose spell
+        while (!defending) {
+            if (hero.cards.contains(currentSpell)) {
+                if (rand.nextInt(100) < yourSpell.accuracy) {
+                    opponentStartHealth -= yourSpell.damageOutput;
+                    hero.cards.remove(currentSpell);
+                }
             } else {
                 System.out.println("You can't do that shit.");
             }
 
-
-        if (!defending) {
-
-            // check if attack succeeds
-            if (rand.nextInt(100) < accuracy) {
-                System.out.println(successMessage);
-                opponentHealthPoints -= damage;
-            } else {
-                System.out.println(failMessage);
+            while (defending) {
+                if (hero.cards.contains(currentSpell) && heroChoice.equals("DEFEND")) {
+                    opponentSpell.damageOutput = 0;
+                    hero.cards.remove(currentSpell);
+                } else if ()  //if enemy defends
             }
-
-            // print opponent health
-            System.out.println("Your opponent now has " + opponentHealthPoints + " HP.");
-
-            // enemy attack
-
-
-        } else {
-            defending = false;
         }
-
-
     }
 
+    private void display(int yourCurrentHealth, int opponentCurrentHealth) {
+
+        playerStartHealth = yourCurrentHealth;
+        opponentStartHealth = opponentCurrentHealth;
+
+        System.out.println("Your current health is: " + yourCurrentHealth);
+        System.out.println("Your current opponent's health is " + opponentCurrentHealth);
+
+        System.out.println("Your spells: " + hero.cards.toString() + "Opponent spells: " + enemy.cards.toString());
+
+    }
 
 
     private void getSpell() {
-        int spell;
 
-        spell = rand.nextInt(4);
-        yourSpellbook.add(allSpells[spell]);
+        ;
+        //new spell = random number  1-4
+//.add
+        //pick random enum
+        //example:  return Spell.values()[(int) (Math.random() * Color.values().length)];
+        //append to spell arraylist
 
-        spell = rand.nextInt(4);
-        opponentSpellbook.add(allSpells[spell]);
+        //.ordinal for built-in arrayList
 
-    }
-
-    private void display() {
-        System.out.println(yourSpellbook);
-        System.out.println(opponentSpellbook);
-
-        System.out.println("Your HP: " + yourHealthPoints);
-        System.out.println("Opponent HP: " + opponentHealthPoints);
-        mainMenu();
+        //wallet interaction
     }
 }
