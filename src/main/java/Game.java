@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -6,35 +7,25 @@ import java.util.Scanner;
  */
 public class Game {
 
-    protected Scanner scanner = new Scanner(System.in);
 
-    protected String gameType = scanner.nextLine();
+        protected Scanner scanner = new Scanner(System.in);
 
-    protected Player gamePlayers[];
+        protected String gameType; // = scanner.nextLine();
 
-    protected Random rand;
+        protected ArrayList<Player> gamePlayers = new ArrayList<Player>();
 
+        protected Random rand;
 
+        protected void display() {
+        }
 
-    protected void display(){
+        protected void setupGame() {
+        }
 
+        protected void promptGameChange() {
+        }
 
-    }
-
-    protected void setupGame(){
-
-
-    }
-
-    protected void promptGameChange(){
-
+        protected void checkWallet() {
+        }
 
     }
-
-    protected void checkWallet(){
-
-
-    }
-
-
-}

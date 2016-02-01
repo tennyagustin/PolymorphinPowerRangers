@@ -10,7 +10,7 @@ public class RPG extends Game {
 
 
     }
-    private void attack(int ){
+    private void attack(int x ){
 
 
     }
@@ -24,16 +24,16 @@ public class RPG extends Game {
 
     }
 
-    private void display(){
+    //private void display(){
+
+    //}
+
+    private void display(String ss ) {
+
 
     }
 
-    private void display(String ) {
-
-
-    }
-
-    private void display(int){
+    private void display(int x){
 
     }
 
