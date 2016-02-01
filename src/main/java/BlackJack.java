@@ -56,6 +56,7 @@ public class BlackJack extends Game implements CardGame {
     private void dealBlackJack() {
 
         int bjHand = 2;
+
         for(int i = 0; i<deck.length; i++){
             this.bjDeck.add(i,deck[i]);
         }
@@ -212,6 +213,15 @@ public class BlackJack extends Game implements CardGame {
 
     public int drawCard(){
 
+        int randomDeckSpot = rand.nextInt(deck.length);
+        int returnStorage;
+
+        if(!(bjDeck.get(randomDeckSpot) == 999)){
+
+            returnStorage = (bjDeck.get(randomDeckSpot));
+            bjDeck.set(randomDeckSpot,999);
+            return returnStorage;
+        } else {drawCard();}
 
         return 0;
     }
