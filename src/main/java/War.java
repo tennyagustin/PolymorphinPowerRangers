@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class War extends Game implements CardGame {
     //-----------main()---------------------------
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
 
         Player p = new Player();
         War w = new War("WarGame", p);
@@ -30,8 +30,8 @@ public class War extends Game implements CardGame {
         d.printDeck();
         d.shuffle();
         d.printDeck();
-*/
-    }
+
+    }*/
 
     //----------main() ends-----------------------
 
@@ -50,16 +50,16 @@ public class War extends Game implements CardGame {
     War(String gameName, Player player) {
         System.out.println("Welcome to the War game!");
         this.gameType = gameName;
-        gamePlayers.set(0,player);
+        gamePlayers.add(0,player);
 
         Player p = new Player();
         p.name = "Computer";
 
-        gamePlayers.add(p);
+        gamePlayers.add(1,p);
         //initialHandSize = d.numberOfCards / gamePlayers.size();
 
-        Player1 = (gamePlayers.get(0));
-        Player2 = (gamePlayers.get(1));
+        Player1 = gamePlayers.get(0);
+        Player2 = gamePlayers.get(1);
 
         p1card0 = Player1.hand[0];
         p2card0 = Player2.hand[0];

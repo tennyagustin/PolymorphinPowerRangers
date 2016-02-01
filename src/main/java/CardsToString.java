@@ -93,7 +93,7 @@ public class CardsToString {
 
     static HashMap<Integer, String> hm = new HashMap<Integer, String>();
 
-    {
+    static {
         hm.put(0, "  _________ \n" +
                 " |         |\n" +
                 " |    /|   |\n" +

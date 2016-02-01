@@ -11,7 +11,7 @@ public class Game {
 
     protected String gameType;
 
-    protected ArrayList<Player> gamePlayers;
+    protected ArrayList<Player> gamePlayers = new ArrayList<>();
 
     protected Random rand;
 

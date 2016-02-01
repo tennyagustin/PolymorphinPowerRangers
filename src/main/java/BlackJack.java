@@ -56,8 +56,8 @@ public class BlackJack extends Game implements CardGame {
     private void dealBlackJack() {
 
         int bjHand = 2;
-        for(int i = 0; i<deck.length-2; i++){
-            this.bjDeck.add(i,deck[i]);
+        for(int i = 0; i<51; i++){
+            this.bjDeck.add(deck[i],i);
         }
 
         for (int h = 0; h < bjHand; h++) {
@@ -131,11 +131,12 @@ public class BlackJack extends Game implements CardGame {
             display();
             hitOrStay();
 
-        } else {
+        } else if(bjInput ==2) {
             runBlackJackAI();
             display();
             if(checkForBeatDealer(sucker)){win();}else{lose();}
-        }
+
+        }else {hitOrStay(); }
     }
 
     /*** BLACK JACK AI: Starting with the first non-dealer Player, while their hand tally is less than 14, they will "HIT". It is irrelevant
@@ -212,7 +213,7 @@ public class BlackJack extends Game implements CardGame {
 
     public int drawCard(){
 
-        int randomDeckSpot = rand.nextInt(deck.length-2);
+        int randomDeckSpot = rand.nextInt(51);
         int returnStorage;
 
         if(!(bjDeck.get(randomDeckSpot) == 999)){
