@@ -6,7 +6,7 @@ import java.util.Scanner;
  */
 public class Game {
 
-    protected Scanner scanner = new Scanner(System.in);
+    protected static Scanner scanner = new Scanner(System.in);
 
     protected String gameType = scanner.nextLine();
 
