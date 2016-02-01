@@ -62,7 +62,7 @@ public class BlackJack extends Game implements CardGame {
 
         for (int h = 0; h < bjHand; h++) {
             for (int i = 0; i < gamePlayers.size(); i++) {
-                gamePlayers.get(i).cards.add(h, drawCard());
+                gamePlayers.get(i).arrayListCards.add(h, drawCard());
             }
         }
 
@@ -80,13 +80,13 @@ public class BlackJack extends Game implements CardGame {
 
     /*** Store dealers first card for future. Set back of card in spot for display purposes. ***/
     private void obscureDealersHand(){
-        dealersTopCardStorage = dealer.cards.get(0);
-        dealer.cards.set(0,52);
+        dealersTopCardStorage = dealer.arrayListCards.get(0);
+        dealer.arrayListCards .set(0,52);
     }
 
     /*** Set dealers card from storage back in hand. ***/
     private void renewDealersHand(){
-        dealer.cards.set(0,dealersTopCardStorage);
+        dealer.arrayListCards.set(0,dealersTopCardStorage);
     }
 
     /*** Clear screen with multiple newlines.  Label and display dealer's hand. Label and display sucker's hand. Label and display remaining gamePlayers' hands,
@@ -95,15 +95,15 @@ public class BlackJack extends Game implements CardGame {
     protected void display() {
         System.out.println("\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n");
         System.out.println("DEALERS HAND");
-        System.out.println(cardTransposer(dealer.cards));
+        System.out.println(cardTransposer(dealer.arrayListCards ));
         System.out.println("YOUR HAND");
-        System.out.println(cardTransposer(sucker.cards));
+        System.out.println(cardTransposer(sucker.arrayListCards ));
 
         System.out.println("\n"+"\n");
 
         System.out.println("OTHER PLAYERS HANDS");
         for(int i=2; i<gamePlayers.size();i++){
-            System.out.print(cardTransposer(gamePlayers.get(i).cards));
+            System.out.print(cardTransposer(gamePlayers.get(i).arrayListCards ));
             System.out.print(cardTransposer(blankHandSpacer));
         }
 
@@ -124,7 +124,7 @@ public class BlackJack extends Game implements CardGame {
 
         if(bjInput == 1){
 
-            sucker.cards.add(drawCard());
+            sucker.arrayListCards.add(drawCard());
             if(checkForBust(sucker)){
                 lose();
             }
@@ -144,13 +144,13 @@ public class BlackJack extends Game implements CardGame {
     private void runBlackJackAI(){
 
         for(int i = 2;i<gamePlayers.size();i++){
-            while(tallyHand(gamePlayers.get(i).cards)<14)
-                {gamePlayers.get(i).cards.add(drawCard());}
+            while(tallyHand(gamePlayers.get(i).arrayListCards )<14)
+                {gamePlayers.get(i).arrayListCards.add(drawCard());}
         }
 
         renewDealersHand();
-        while(tallyHand(dealer.cards)<17)
-            {dealer.cards.add(drawCard());}
+        while(tallyHand(dealer.arrayListCards )<17)
+            {dealer.arrayListCards.add(drawCard());}
         if(checkForBust(dealer)){win();}
     }
 
@@ -173,17 +173,17 @@ public class BlackJack extends Game implements CardGame {
 
     private boolean checkForBlackJack(Player x) {
 
-        return (tallyHand(x.cards)==21);
+        return (tallyHand(x.arrayListCards)==21);
     }
 
     private boolean checkForBeatDealer(Player x){
 
-        return (tallyHand(x.cards) > tallyHand(dealer.cards));
+        return (tallyHand(x.arrayListCards ) > tallyHand(dealer.arrayListCards ));
     }
 
     private boolean checkForBust(Player x){
 
-        return (tallyHand(x.cards)>21);
+        return (tallyHand(x.arrayListCards )>21);
     }
 
     private void win(){
@@ -211,6 +211,8 @@ public class BlackJack extends Game implements CardGame {
     }
 
     public int drawCard(){
+
+
         return 0;
     }
 

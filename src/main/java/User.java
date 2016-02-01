@@ -3,11 +3,19 @@
  */
 public class User extends Player {
     private String myGame;
-    private int wallet =500;
+    private int wallet = 500;
 
 
-    private void tapMAC(int cashMoney){
+    protected void tapMAC(int cashMoney) {
         wallet += cashMoney;
 
+    }
+
+    public void setWalletBalance(int cash) {
+        this.wallet = cash;
+    }
+
+    public int getWalletBalance() {
+        return this.wallet;
     }
 }

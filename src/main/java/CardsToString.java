@@ -6,6 +6,16 @@ import java.util.HashMap;
  */
 public class CardsToString {
 
+    public static ArrayList<Integer> convertArrayTOArrayList (int[] x){
+
+        ArrayList<Integer> converterArrayList = new ArrayList<Integer>(x.length) ;
+
+        for(Integer y : x){
+            converterArrayList.add(y);
+        }
+
+        return converterArrayList;
+    }
     public static int[] convertArrayListTOArray(ArrayList<Integer> x){
 
         /*** Takes an ArrayList and manually enters it into a regular Array for use in magic ***/
