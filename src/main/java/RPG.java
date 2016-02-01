@@ -3,7 +3,7 @@
  */
 public class RPG extends Game {
 
-    private int[] healthPointArray[];
+   private int[] healthPointArray[];
 
 
     RPG(String name, Player player){

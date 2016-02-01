@@ -11,15 +11,15 @@ public class War extends Game implements CardGame {
     War(String gameName, Player playerHand){
 
     }
-    int drawCard(){
+    public int drawCard(){
         return 0;
     };
 
-    int checkResult(){
+    public int checkResult(){
         return 0;
     };
 
-    String cardTransposer(int[] playersHand){
+    public String cardTransposer(int[] playersHand){
         return null;
     };
 
